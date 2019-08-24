@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -13,7 +11,7 @@ const app = express();
 mongoose.connect('mongodb://localhost/cinema', {
   keepAlive: true,
   useNewUrlParser: true,
-  reconnectTries: Number.MAX_VALUE
+  reconnectTries: Number.MAX_VALUE,
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
