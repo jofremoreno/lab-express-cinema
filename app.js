@@ -1,11 +1,13 @@
 const express = require('express');
+
+const hbs = require('hbs');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
-
+const moviesRouter = require('./routes/movies.js');
 const app = express();
 
 mongoose.connect('mongodb://localhost/cinema', {
@@ -23,7 +25,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+hbs.registerPartials(`${__dirname}/views/partials`);
+
 app.use('/', indexRouter);
+app.use('/movies', moviesRouter);
 // -- 404 and error handler
 
 // NOTE: requires a views/not-found.ejs template
